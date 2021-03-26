@@ -1,4 +1,6 @@
 ![](https://img.shields.io/badge/Foundry-v0.7.9-informational)
+<!--- TODO: do the below -->
+
 <!--- Downloads @ Latest Badge -->
 <!--- replace <user>/<repo> with your username/repository -->
 <!--- ![Latest Release Download Count](https://img.shields.io/github/downloads/<user>/<repo>/latest/module.zip) -->
@@ -7,47 +9,61 @@
 <!--- replace <your-module-name> with the `name` in your manifest -->
 <!--- ![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2F<your-module-name>&colorB=4aa94a) -->
 
+# Oliver's Dark Heresy 2 Extras
 
-# How to use this Template to create a versioned Release
+An extention to moo-man's excellent [DarkHeresy2E-FoundryVTT](https://github.com/moo-man/DarkHeresy2E-FoundryVTT).
 
-1. Open your repository's releases page.
+This module extends some of the inbuild classes and adds some util functions, documentation and examples are below.
 
-![Where to click to open repository releases.](https://user-images.githubusercontent.com/7644614/93409301-9fd25080-f864-11ea-9e0c-bdd09e4418e4.png)
+# Documentation
 
-2. Click "Draft a new release"
+## DarkHeresyActor
 
-![Draft a new release button.](https://user-images.githubusercontent.com/7644614/93409364-c1333c80-f864-11ea-89f1-abfcb18a8d9f.png)
+To help working with the Systems Actor class, I've added a few extension functions:
 
-3. Fill out the release version as the tag name.
+## Utils
 
-## <span color="red">Do not prefix your tag name with a `v`.</span>
+These are some functions I've added to help
 
-If you want to add details at this stage you can, or you can always come back later and edit them.
+## Macros
 
-![Release Creation Form](https://user-images.githubusercontent.com/7644614/93409543-225b1000-f865-11ea-9a19-f1906a724421.png)
+# Changelog
 
-4. Hit submit.
+All notable changes to this project will be documented below
 
-5. Wait a few minutes.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-A Github Action will run to populate the `module.json` and `module.zip` with the correct urls that you can then use to distribute this release. You can check on its status in the "Actions" tab.
+## [Unreleased]
 
-![Actions Tab](https://user-images.githubusercontent.com/7644614/93409820-c1800780-f865-11ea-8c6b-c3792e35e0c8.png)
+### Added 
 
-6. Grab the module.json url from the release's details page.
+- Added extensions to built-in-classes
+- Added macro for First Aid
 
-![image](https://user-images.githubusercontent.com/7644614/93409960-10c63800-f866-11ea-83f6-270cc5d10b71.png)
+<!--
+## [0.0.1] - 2014-08-09
 
-This `module.json` will only ever point at this release's `module.zip`, making it useful for sharing a specific version for compatibility purposes.
+### Added
 
-7. You can use the url `https://github.com/<user>/<repo>/releases/latest/download/module.json` to refer to the manifest.
+- Better explanation of the difference between the file ("CHANGELOG")
+  and its function "the change log".
 
-This is the url you want to use to install the module typically, as it will get updated automatically.
+### Changed
 
+- Refer to a "change log" instead of a "CHANGELOG" throughout the site
+  to differentiate between the file and the purpose of the file — the
+  logging of changes.
 
-# FoundryVTT Module
+### Removed
 
-Does something, probably
+- Remove empty sections from CHANGELOG, they occupy too much space and
+  create too much noise in the file. People will have to assume that the
+  missing sections were intentionally left out because they contained no
+  notable changes.
+-->
 
-## Changelog
-
+[unreleased]: https://github.com/Akeboshiwind/olivers-dh2-extras/compare/0.0.1...HEAD
+<!-- [0.0.2]: https://github.com/Akeboshiwind/olivers-dh2-extras/compare/0.0.1...0.0.2
+[0.0.1]: https://github.com/Akeboshiwind/olivers-dh2-extras/releases/tag/0.0.1
+-->
