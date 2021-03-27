@@ -1,3 +1,4 @@
+// TODO: Generate docs into file automatically
 Hooks.once('ready', async function() {
     // >> Add utils
 
@@ -479,6 +480,9 @@ Hooks.once('ready', async function() {
          * @async
          * @param {string} effectId - The id of the StatusEffect
          * @return {Promise<number>}
+         *
+         * @throws if StatusEffect is not found
+         * @throws if event has already expired
          *
          * @requires tposney/about-time
          *
