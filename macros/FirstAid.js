@@ -23,27 +23,17 @@ async function main() {
 
     // >> Heal all targets
 
-    const targets = Array.from(game.user.targets);
-
-    if (targets.length == 0) {
+    if (game.user.targets.size == 0) {
         return ui.notifications.error("Must select at least 1 target");
     }
 
-    for (let target of targets) {
+    for (let target of game.user.targets) {
 
 
         // >> Gather target info
 
         const tActor = target.actor;
-        const tActorToughnessBonus = tActor.data.data.characteristics.toughness.bonus;
         const tActorInfo = {
-            // @PDF[Dark Heresy 2|page=244]{Healing}
-            // A character is Heavily Damaged whenever he has
-            // taken more damage than twice his Toughness bonus
-            isHeavilyWounded: tActor.data.data.wounds.value > (tActorToughnessBonus * 2),
-
-            isCriticallyWounded: tActor.data.data.wounds.critical > 0,
-
             wounds: tActor.data.data.wounds,
         };
 
@@ -54,6 +44,7 @@ async function main() {
         // A given individual can only be treated
         // with first aid once every 24 hours
         if (tActor.hasStatusEffect(healingEffect)) {
+            // TODO: Handle case when about-time isn't installed
             try {
                 const diff = await tActor.timeUntilStatusEffectExpiry(healingEffect);
 
@@ -78,7 +69,7 @@ async function main() {
         // –10 penalty if his patient is Heavily Damaged
         // or a –10 penalty for every point of Critical Damage
         // if his patient is Critically Damaged.
-        if (tActorInfo.isCriticallyWounded) {
+        if (tActor.isCriticallyDamaged()) {
             console.log("Target is critically wounded");
             // @PDF[Dark Heresy 2|page=131]{Superior Chirurgeon}
             // Only suffer a -10 penalty when the target is critically wounded
@@ -87,7 +78,7 @@ async function main() {
             } else {
                 healingPenalty = (-10 * tActorInfo.wounds.critical).toString()
             }
-        } else if (tActorInfo.isHeavilyWounded) {
+        } else if (tActor.isHeavilyDamaged()) {
             console.log("Target is critically wounded");
             // @PDF[Dark Heresy 2|page=131]{Superior Chirurgeon}
             // Ignores the penalties for Heavily Damaged patients 
@@ -97,12 +88,13 @@ async function main() {
         }
 
         // @PDF[Dark Heresy 2|page=109]{First Aid}
-        // To perform first aid, a character must make
-        // a Challenging (+0) Medicae test
-        // (with the penalties above)
+        // To perform first aid, a character must make a Challenging (+0)
+        // Medicae test (with the penalties above)
         const rollTarget = new Roll("@medicae + @supChir + @penalty",
             {
                 medicae: casterInfo.medicaeTotal,
+                // @PDF[Dark Heresy 2|page=131]{Superior Chirurgeon}
+                // He gains a +20 bonus on all Medicae skill tests
                 supChir: casterInfo.hasSuperiorChirurgeon ? "+20" : "+0",
                 penalty: healingPenalty,
             }).roll();
