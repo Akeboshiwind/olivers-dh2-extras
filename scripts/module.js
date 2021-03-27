@@ -568,17 +568,19 @@ Hooks.once('ready', async function() {
          *
          * See the {@link https://github.com/moo-man/DarkHeresy2E-FoundryVTT/blob/master/script/common/actor.js|DarkHeresyActor} code (no docs yet)
          *
+         * Requires the {@link https://github.com/moo-man/DarkHeresy2E-FoundryVTT|Dark Heresy 2E} System to be installed.
+         *
+         * If the system isn't installed these extensions won't be loaded
+         *
          * @name DarkHeresyActor
          * @type {DarkHeresyActor}
          */
         const DarkHeresyActor = CONFIG.Actor.entityClass;
 
         /**
-         * Cancel the expiry of the given StatusEffect on the actor
+         * Check if the DarkHeresyActor has the given talent.
          *
-         * Requires the {@link https://github.com/moo-man/DarkHeresy2E-FoundryVTT|Dark Heresy 2E} System to be installed.
-         *
-         * If the system isn't installed this function won't be loaded
+         * Requires an exact match
          *
          * @alias DarkHeresyActor#hasTalent
          * @param {string} talentName - The name of the talent to look for (must be exact match)
