@@ -13,17 +13,12 @@
 
 An extention to moo-man's excellent [DarkHeresy2E-FoundryVTT](https://github.com/moo-man/DarkHeresy2E-FoundryVTT).
 
-This module extends some of the inbuild classes and adds some util functions, documentation and examples are below.
+This module extends on the base Actor & DarkHeresyActor classes and adds some extra util functions. For more details and examples see the documentation.
 
 # Documentation
 
-## DarkHeresyActor
+- [API Docs](./docs/api.md)
+- [Deployment](./docs/deploy.md)
 
-To help working with the Systems Actor class, I've added a few extension functions:
-
-## Utils
-
-These are some functions I've added to help
-
-## Macros
-
+<!--- TODO: Add docs for macros -->
+<!--- TODO: Auto generate macros into packfile -->
