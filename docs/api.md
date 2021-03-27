@@ -2,7 +2,8 @@
 
 <dl>
 <dt><a href="#OUtils">OUtils</a></dt>
-<dd></dd>
+<dd><p>A set of useful util functions</p>
+</dd>
 <dt><a href="#Actor">Actor</a> : <code><a href="#Actor">Actor</a></code></dt>
 <dd><p>Extensions to the base Actor class</p>
 <p>See the <a href="https://foundryvtt.com/api/Actor.html">Actor</a> docs in
@@ -17,6 +18,8 @@ foundry</p>
 <a name="OUtils"></a>
 
 ## OUtils
+A set of useful util functions
+
 **Kind**: global variable  
 
 * [OUtils](#OUtils)

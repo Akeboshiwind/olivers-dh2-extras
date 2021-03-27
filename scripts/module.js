@@ -3,6 +3,8 @@ Hooks.once('ready', async function() {
     // >> Add utils
 
     /**
+     * A set of useful util functions
+     *
      * @alias OUtils
      */
     OUtils = {
