@@ -31,7 +31,7 @@ async main() {
     // You can only use Takedown if you have the talent
     if (actor.hasTalent("Takedown")) {
         if (actor.hasStatusEffect(dizzyStatusEffect)) {
-            ui.notification.warn("This character can't perform a Takedown twice inone day");
+            ui.notification.warn("This character can't perform a Takedown twice in one day");
             // You could use actor.timeUntilStatusEffectExpiry(dizzyStatusEffect)
             // to display how long until they can use Takedown again
         } else {
