@@ -534,11 +534,11 @@ If the system isn't installed these extensions won't be loaded
         * [.HEAVILY_DAMAGED](#DarkHeresyActor+damageLevel.HEAVILY_DAMAGED) : <code>string</code>
         * [.CRITICALLY_DAMAGED](#DarkHeresyActor+damageLevel.CRITICALLY_DAMAGED) : <code>string</code>
         * [.DEAD](#DarkHeresyActor+damageLevel.DEAD) : <code>string</code>
-    * [.hasTalent(talentName)](#DarkHeresyActor+hasTalent) ⇒
-    * [.getDamageLevel()](#DarkHeresyActor+getDamageLevel) ⇒
-    * [.isLightlyDamaged()](#DarkHeresyActor+isLightlyDamaged) ⇒
-    * [.isHeavilyDamaged()](#DarkHeresyActor+isHeavilyDamaged) ⇒
-    * [.isCriticallyDamaged()](#DarkHeresyActor+isCriticallyDamaged) ⇒
+    * [.hasTalent(talentName)](#DarkHeresyActor+hasTalent) ⇒ <code>boolean</code>
+    * [.getDamageLevel()](#DarkHeresyActor+getDamageLevel) ⇒ <code>string</code>
+    * [.isLightlyDamaged()](#DarkHeresyActor+isLightlyDamaged) ⇒ <code>boolean</code>
+    * [.isHeavilyDamaged()](#DarkHeresyActor+isHeavilyDamaged) ⇒ <code>boolean</code>
+    * [.isCriticallyDamaged()](#DarkHeresyActor+isCriticallyDamaged) ⇒ <code>boolean</code>
 
 
 * * *
@@ -637,13 +637,12 @@ anyway I won't be tracking this.
 
 <a name="DarkHeresyActor+hasTalent"></a>
 
-### darkHeresyActor.hasTalent(talentName) ⇒
+### darkHeresyActor.hasTalent(talentName) ⇒ <code>boolean</code>
 Check if the DarkHeresyActor has the given talent.
 
 Requires an exact match
 
 **Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
-**Returns**: boolean  
 **Requires**: <code>module:moo-man&#x27;s</code>  
 
 | Param | Type | Description |
@@ -663,7 +662,7 @@ if (actor.hasTalent("Superior Chirurgeon")) {
 
 <a name="DarkHeresyActor+getDamageLevel"></a>
 
-### darkHeresyActor.getDamageLevel() ⇒
+### darkHeresyActor.getDamageLevel() ⇒ <code>string</code>
 Calculates the level of damage a DarkHeresyActor has taken and
 returns a string (effectively an enum) of which level it is.
 
@@ -681,7 +680,6 @@ i.e. if a character is Critically Damaged then isLightlyDamaged will
 return false.
 
 **Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
-**Returns**: boolean  
 **Requires**: <code>module:moo-man&#x27;s</code>  
 **Example**  
 ```js
@@ -706,14 +704,13 @@ switch (actor.getDamageLevel()) {
 
 <a name="DarkHeresyActor+isLightlyDamaged"></a>
 
-### darkHeresyActor.isLightlyDamaged() ⇒
+### darkHeresyActor.isLightlyDamaged() ⇒ <code>boolean</code>
 Checks to see if the DarkHeresyActor is Lightly Damaged
 
 If the character is any other damage level then this function
 returns false.
 
 **Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
-**Returns**: boolean  
 **Requires**: <code>module:moo-man&#x27;s</code>  
 **Example**  
 ```js
@@ -728,14 +725,13 @@ if (actor.isLightlyDamaged()) {
 
 <a name="DarkHeresyActor+isHeavilyDamaged"></a>
 
-### darkHeresyActor.isHeavilyDamaged() ⇒
+### darkHeresyActor.isHeavilyDamaged() ⇒ <code>boolean</code>
 Checks to see if the DarkHeresyActor is Heavily Damaged
 
 If the character is any other damage level then this function
 returns false.
 
 **Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
-**Returns**: boolean  
 **Requires**: <code>module:moo-man&#x27;s</code>  
 **Example**  
 ```js
@@ -750,14 +746,13 @@ if (actor.isHeavilyDamaged()) {
 
 <a name="DarkHeresyActor+isCriticallyDamaged"></a>
 
-### darkHeresyActor.isCriticallyDamaged() ⇒
+### darkHeresyActor.isCriticallyDamaged() ⇒ <code>boolean</code>
 Checks to see if the DarkHeresyActor is Critically Damaged
 
 If the character is any other damage level then this function
 returns false.
 
 **Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
-**Returns**: boolean  
 **Requires**: <code>module:moo-man&#x27;s</code>  
 **Example**  
 ```js

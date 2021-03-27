@@ -340,7 +340,7 @@ Hooks.once('ready', async function() {
          * @param {string} effectId - The id of the StatusEffect
          * @param {object} duration - An about-time {@link https://gitlab.com/tposney/about-time/-/blob/master/src/module/calendar/DTMod.ts|DTMod}
          * @param {boolean} [updateExpiry=false] - If the actor already has the StatusEffect, update the expiry
-         * @return {Promise<boolean>}
+         * @returns {Promise<boolean>}
          *
          * @throws if the actor has no tokens or the first token is null
          * @throws if the StatusEffect doesn't exist
@@ -453,7 +453,7 @@ Hooks.once('ready', async function() {
          *
          * @async
          * @param {string} effectId - The id of the StatusEffect
-         * @return {Promise<object>}
+         * @returns {Promise<object>}
          *
          * @requires tposney/about-time
          *
@@ -484,7 +484,7 @@ Hooks.once('ready', async function() {
          *
          * @async
          * @param {string} effectId - The id of the StatusEffect
-         * @return {Promise<number>}
+         * @returns {Promise<number>}
          *
          * @throws if StatusEffect is not found
          * @throws if event has already expired
@@ -528,7 +528,7 @@ Hooks.once('ready', async function() {
          *
          * @async
          * @param {string} effectId - The id of the StatusEffect
-         * @return {Promise<boolean>}
+         * @returns {Promise<boolean>}
          *
          * @requires about-time
          *
@@ -586,7 +586,7 @@ Hooks.once('ready', async function() {
          *
          * @alias DarkHeresyActor#hasTalent
          * @param {string} talentName - The name of the talent to look for (must be exact match)
-         * @return boolean
+         * @returns {boolean}
          *
          * @requires moo-man's Dark Heresy 2E System
          *
@@ -705,7 +705,7 @@ Hooks.once('ready', async function() {
          * return false.
          *
          * @alias DarkHeresyActor#getDamageLevel
-         * @return boolean
+         * @returns {string}
          *
          * @requires moo-man's Dark Heresy 2E System
          *
@@ -765,7 +765,7 @@ Hooks.once('ready', async function() {
          * returns false.
          *
          * @alias DarkHeresyActor#isLightlyDamaged
-         * @return boolean
+         * @returns {boolean}
          *
          * @requires moo-man's Dark Heresy 2E System
          *
@@ -787,7 +787,7 @@ Hooks.once('ready', async function() {
          * returns false.
          *
          * @alias DarkHeresyActor#isHeavilyDamaged
-         * @return boolean
+         * @returns {boolean}
          *
          * @requires moo-man's Dark Heresy 2E System
          *
@@ -809,7 +809,7 @@ Hooks.once('ready', async function() {
          * returns false.
          *
          * @alias DarkHeresyActor#isCriticallyDamaged
-         * @return boolean
+         * @returns {boolean}
          *
          * @requires moo-man's Dark Heresy 2E System
          *
