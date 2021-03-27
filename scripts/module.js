@@ -600,6 +600,227 @@ Hooks.once('ready', async function() {
 
             return talents.filter(t => t.name == talentName).length >= 1;
         }
+
+        /**
+         * The damage levels that a DarkHeresyActor actor can have
+         *
+         * @alias DarkHeresyActor#damageLevel
+         * @type {object}
+         * @const
+         *
+         * @requires moo-man's Dark Heresy 2E System
+         */
+        DarkHeresyActor.prototype.damageLevel = {
+            /**
+             * The character hasn't taken any damage at all
+             *
+             * @type {string}
+             * @const
+             *
+             * @requires moo-man's Dark Heresy 2E System
+             */
+            NONE: "None",
+            /**
+             * The character is considered "Lightly Damaged"
+             *
+             * @PDF[Dark Heresy 2|page=244]{Lightly Damaged}
+             * A character is considered Lightly Damaged if he has taken damage
+             * equal to or less than twice his Toughness bonus
+             *
+             * @type {string}
+             * @const
+             *
+             * @requires moo-man's Dark Heresy 2E System
+             */
+            LIGHTLY_DAMAGED: "Lightly Damaged",
+            /**
+             * The character is considered "Heavily Damaged"
+             *
+             * @PDF[Dark Heresy 2|page=244]{Heavily Damaged}
+             * A character is considered Heavily Damaged whenever he has taken
+             * more damage than twice his Toughness bonus
+             *
+             * @type {string}
+             * @const
+             *
+             * @requires moo-man's Dark Heresy 2E System
+             */
+            HEAVILY_DAMAGED: "Heavily Damaged",
+            /**
+             * The character is considered "Critically Damaged"
+             *
+             * @PDF[Dark Heresy 2|page=244]{Critically Damaged}
+             * A character is Critically Damaged whenever he has taken damage
+             * in excess of his wounds
+             *
+             * @type {string}
+             * @const
+             *
+             * @requires moo-man's Dark Heresy 2E System
+             */
+            CRITICALLY_DAMAGED: "Critically Damaged",
+            /**
+             * The character is considered "Dead"
+             *
+             * There are lots of different ways a character can be considered
+             * dead.
+             *
+             * Like:
+             * - From the effect of Critical Damage
+             * - From taking Characteristic Damage
+             * - From having fatigue exceeding double their threshold
+             *
+             * There are probably a few more ways beyond these but in the end I
+             * don't think it matters as this is more at the discression of the
+             * DM and the player anyway.
+             *
+             * So, because it's too complicated and the DM get's the final say
+             * anyway I won't be tracking this.
+             *
+             * @type {string}
+             * @const
+             *
+             * @requires moo-man's Dark Heresy 2E System
+             */
+            DEAD: "Dead"
+        }
+
+        /**
+         * Calculates the level of damage a DarkHeresyActor has taken and
+         * returns a string (effectively an enum) of which level it is.
+         *
+         * See {@link DarkHeresyActor.damageLevel} for the levels
+         *
+         * There are some wrapper functions which might be easier to use that
+         * just return simple booleans:
+         *
+         * {@link DarkHeresyActor#isLightlyDamaged}
+         * {@link DarkHeresyActor#isHeavilyDamaged}
+         * {@link DarkHeresyActor#isCriticallyDamaged}
+         *
+         * These functions only check if a character is in the specified range.
+         * i.e. if a character is Critically Damaged then isLightlyDamaged will
+         * return false.
+         *
+         * @alias DarkHeresyActor#getDamageLevel
+         * @return boolean
+         *
+         * @requires moo-man's Dark Heresy 2E System
+         *
+         * @example
+         * const actor = game.user.character;
+         * switch (actor.getDamageLevel()) {
+         *     case actor.damageLevel.NONE:
+         *         console.log("I'm fine, thanks for asking");
+         *         break
+         *     case actor.damageLevel.LIGHTLY_DAMAGED:
+         *         console.log("Meh, I've had worse");
+         *         break
+         *     case actor.damageLevel.HEAVILY_DAMAGED:
+         *         console.log("Ok, I'll admit. This hurts");
+         *         break
+         *     case actor.damageLevel.CRITICALLY_DAMAGED:
+         *         console.log(":'(");
+         *         break
+         * }
+         */
+        DarkHeresyActor.prototype.getDamageLevel = function() {
+            const toughnessBonus = this.data.data.characteristics.toughness.bonus;
+            const wounds = this.data.data.wounds;
+
+            // We presume that wounds and critical damage are calculated
+            // correctly on the Actor
+            //
+            // So wounds will be from 0 to max wounds
+            // and critical wounds will only be populated if wounds is at max
+
+            if (wounds.value <= 0) {
+                return this.damageLevel.NONE;
+            } else if (wounds.value <= (toughnessBonus * 2)) {
+                // @PDF[Dark Heresy 2|page=244]{Lightly Damaged}
+                // A character is considered Lightly Damaged if he has taken
+                // damage equal to or less than twice his Toughness bonus
+                return this.damageLevel.LIGHTLY_DAMAGED;
+            } else {
+                if (wounds.value >= wounds.max && wounds.critical > 0) {
+                    // @PDF[Dark Heresy 2|page=244]{Critically Damaged}
+                    // A character is Critically Damaged whenever he has taken damage
+                    // in excess of his wounds
+                    return this.damageLevel.CRITICALLY_DAMAGED;
+                } else {
+                    // @PDF[Dark Heresy 2|page=244]{Heavily Damaged}
+                    // A character is considered Heavily Damaged whenever he has
+                    // taken more damage than twice his Toughness bonus
+                    return this.damageLevel.HEAVILY_DAMAGED;
+                }
+            }
+        }
+
+        /**
+         * Checks to see if the DarkHeresyActor is Lightly Damaged
+         *
+         * If the character is any other damage level then this function
+         * returns false.
+         *
+         * @alias DarkHeresyActor#isLightlyDamaged
+         * @return boolean
+         *
+         * @requires moo-man's Dark Heresy 2E System
+         *
+         * @example
+         * const actor = game.user.character;
+         * if (actor.isLightlyDamaged()) {
+         *     // Do some stuff to reduce how effective FirstAid is
+         *     // See the FirstAid macro for more
+         * }
+         */
+        DarkHeresyActor.prototype.isLightlyDamaged = function() {
+            return this.getDamageLevel() === this.damageLevel.LIGHTLY_DAMAGED;
+        }
+
+        /**
+         * Checks to see if the DarkHeresyActor is Heavily Damaged
+         *
+         * If the character is any other damage level then this function
+         * returns false.
+         *
+         * @alias DarkHeresyActor#isHeavilyDamaged
+         * @return boolean
+         *
+         * @requires moo-man's Dark Heresy 2E System
+         *
+         * @example
+         * const actor = game.user.character;
+         * if (actor.isHeavilyDamaged()) {
+         *     // Do some stuff to reduce how effective FirstAid is
+         *     // See the FirstAid macro for more
+         * }
+         */
+        DarkHeresyActor.prototype.isHeavilyDamaged = function() {
+            return this.getDamageLevel() === this.damageLevel.HEAVILY_DAMAGED;
+        }
+
+        /**
+         * Checks to see if the DarkHeresyActor is Critically Damaged
+         *
+         * If the character is any other damage level then this function
+         * returns false.
+         *
+         * @alias DarkHeresyActor#isCriticallyDamaged
+         * @return boolean
+         *
+         * @requires moo-man's Dark Heresy 2E System
+         *
+         * @example
+         * const actor = game.user.character;
+         * if (actor.isCriticallyDamaged()) {
+         *     // Do some stuff to reduce how effective FirstAid is
+         *     // See the FirstAid macro for more
+         * }
+         */
+        DarkHeresyActor.prototype.isCriticallyDamaged = function() {
+            return this.getDamageLevel() === this.damageLevel.CRITICALLY_DAMAGED;
+        }
     }
 
     // >> Add macros
