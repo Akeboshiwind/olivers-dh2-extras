@@ -520,3 +520,31 @@ See the [DarkHeresyActor](https://github.com/moo-man/DarkHeresy2E-FoundryVTT/blo
 
 * * *
 
+<a name="DarkHeresyActor+hasTalent"></a>
+
+### darkHeresyActor.hasTalent(talentName) ⇒
+Cancel the expiry of the given StatusEffect on the actor
+
+Requires the [Dark Heresy 2E](https://github.com/moo-man/DarkHeresy2E-FoundryVTT) System to be installed.
+
+If the system isn't installed this function won't be loaded
+
+**Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
+**Returns**: boolean  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| talentName | <code>string</code> | The name of the talent to look for (must be exact match) |
+
+**Example**  
+```js
+const actor = game.user.character;
+if (actor.hasTalent("Superior Chirurgeon")) {
+    // Do some stuff to allow for extra healing
+    // See my FirstAid macro for more
+}
+```
+
+* * *
+

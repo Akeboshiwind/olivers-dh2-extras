@@ -576,6 +576,7 @@ Hooks.once('ready', async function() {
          *
          * If the system isn't installed this function won't be loaded
          *
+         * @alias DarkHeresyActor#hasTalent
          * @param {string} talentName - The name of the talent to look for (must be exact match)
          * @return boolean
          *
