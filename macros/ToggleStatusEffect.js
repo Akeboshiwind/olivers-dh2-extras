@@ -1,4 +1,3 @@
-// TODO: Test works
 // TODO: Add in optional duration
 // TODO: Add in optional reminder every turn
 // TODO: Wrap Dialog so clicking `x` always cancels?
