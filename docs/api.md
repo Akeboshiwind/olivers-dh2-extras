@@ -12,6 +12,8 @@ foundry</p>
 <dt><a href="#DarkHeresyActor">DarkHeresyActor</a> : <code><a href="#DarkHeresyActor">DarkHeresyActor</a></code></dt>
 <dd><p>Extensions to the DarkHeresyActor class</p>
 <p>See the <a href="https://github.com/moo-man/DarkHeresy2E-FoundryVTT/blob/master/script/common/actor.js">DarkHeresyActor</a> code (no docs yet)</p>
+<p>Requires the <a href="https://github.com/moo-man/DarkHeresy2E-FoundryVTT">Dark Heresy 2E</a> System to be installed.</p>
+<p>If the system isn&#39;t installed these extensions won&#39;t be loaded</p>
 </dd>
 </dl>
 
@@ -519,18 +521,126 @@ Extensions to the DarkHeresyActor class
 
 See the [DarkHeresyActor](https://github.com/moo-man/DarkHeresy2E-FoundryVTT/blob/master/script/common/actor.js) code (no docs yet)
 
+Requires the [Dark Heresy 2E](https://github.com/moo-man/DarkHeresy2E-FoundryVTT) System to be installed.
+
+If the system isn't installed these extensions won't be loaded
+
 **Kind**: global variable  
+
+* [DarkHeresyActor](#DarkHeresyActor) : [<code>DarkHeresyActor</code>](#DarkHeresyActor)
+    * [.damageLevel](#DarkHeresyActor+damageLevel) : <code>object</code>
+        * [.NONE](#DarkHeresyActor+damageLevel.NONE) : <code>string</code>
+        * [.LIGHTLY_DAMAGED](#DarkHeresyActor+damageLevel.LIGHTLY_DAMAGED) : <code>string</code>
+        * [.HEAVILY_DAMAGED](#DarkHeresyActor+damageLevel.HEAVILY_DAMAGED) : <code>string</code>
+        * [.CRITICALLY_DAMAGED](#DarkHeresyActor+damageLevel.CRITICALLY_DAMAGED) : <code>string</code>
+        * [.DEAD](#DarkHeresyActor+damageLevel.DEAD) : <code>string</code>
+    * [.hasTalent(talentName)](#DarkHeresyActor+hasTalent) ⇒
+    * [.getDamageLevel()](#DarkHeresyActor+getDamageLevel) ⇒
+    * [.isLightlyDamaged()](#DarkHeresyActor+isLightlyDamaged) ⇒
+    * [.isHeavilyDamaged()](#DarkHeresyActor+isHeavilyDamaged) ⇒
+    * [.isCriticallyDamaged()](#DarkHeresyActor+isCriticallyDamaged) ⇒
+
+
+* * *
+
+<a name="DarkHeresyActor+damageLevel"></a>
+
+### darkHeresyActor.damageLevel : <code>object</code>
+The damage levels that a DarkHeresyActor actor can have
+
+**Kind**: instance constant of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+
+* [.damageLevel](#DarkHeresyActor+damageLevel) : <code>object</code>
+    * [.NONE](#DarkHeresyActor+damageLevel.NONE) : <code>string</code>
+    * [.LIGHTLY_DAMAGED](#DarkHeresyActor+damageLevel.LIGHTLY_DAMAGED) : <code>string</code>
+    * [.HEAVILY_DAMAGED](#DarkHeresyActor+damageLevel.HEAVILY_DAMAGED) : <code>string</code>
+    * [.CRITICALLY_DAMAGED](#DarkHeresyActor+damageLevel.CRITICALLY_DAMAGED) : <code>string</code>
+    * [.DEAD](#DarkHeresyActor+damageLevel.DEAD) : <code>string</code>
+
+
+* * *
+
+<a name="DarkHeresyActor+damageLevel.NONE"></a>
+
+#### damageLevel.NONE : <code>string</code>
+The character hasn't taken any damage at all
+
+**Kind**: static constant of [<code>damageLevel</code>](#DarkHeresyActor+damageLevel)  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+
+* * *
+
+<a name="DarkHeresyActor+damageLevel.LIGHTLY_DAMAGED"></a>
+
+#### damageLevel.LIGHTLY\_DAMAGED : <code>string</code>
+The character is considered "Lightly Damaged"
+
+**Kind**: static constant of [<code>damageLevel</code>](#DarkHeresyActor+damageLevel)  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+**Pdf[dark**: Heresy 2|page=244]{Lightly Damaged}
+A character is considered Lightly Damaged if he has taken damage
+equal to or less than twice his Toughness bonus  
+
+* * *
+
+<a name="DarkHeresyActor+damageLevel.HEAVILY_DAMAGED"></a>
+
+#### damageLevel.HEAVILY\_DAMAGED : <code>string</code>
+The character is considered "Heavily Damaged"
+
+**Kind**: static constant of [<code>damageLevel</code>](#DarkHeresyActor+damageLevel)  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+**Pdf[dark**: Heresy 2|page=244]{Heavily Damaged}
+A character is considered Heavily Damaged whenever he has taken
+more damage than twice his Toughness bonus  
+
+* * *
+
+<a name="DarkHeresyActor+damageLevel.CRITICALLY_DAMAGED"></a>
+
+#### damageLevel.CRITICALLY\_DAMAGED : <code>string</code>
+The character is considered "Critically Damaged"
+
+**Kind**: static constant of [<code>damageLevel</code>](#DarkHeresyActor+damageLevel)  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+**Pdf[dark**: Heresy 2|page=244]{Critically Damaged}
+A character is Critically Damaged whenever he has taken damage
+in excess of his wounds  
+
+* * *
+
+<a name="DarkHeresyActor+damageLevel.DEAD"></a>
+
+#### damageLevel.DEAD : <code>string</code>
+The character is considered "Dead"
+
+There are lots of different ways a character can be considered
+dead.
+
+Like:
+- From the effect of Critical Damage
+- From taking Characteristic Damage
+- From having fatigue exceeding double their threshold
+
+There are probably a few more ways beyond these but in the end I
+don't think it matters as this is more at the discression of the
+DM and the player anyway.
+
+So, because it's too complicated and the DM get's the final say
+anyway I won't be tracking this.
+
+**Kind**: static constant of [<code>damageLevel</code>](#DarkHeresyActor+damageLevel)  
+**Requires**: <code>module:moo-man&#x27;s</code>  
 
 * * *
 
 <a name="DarkHeresyActor+hasTalent"></a>
 
 ### darkHeresyActor.hasTalent(talentName) ⇒
-Cancel the expiry of the given StatusEffect on the actor
+Check if the DarkHeresyActor has the given talent.
 
-Requires the [Dark Heresy 2E](https://github.com/moo-man/DarkHeresy2E-FoundryVTT) System to be installed.
-
-If the system isn't installed this function won't be loaded
+Requires an exact match
 
 **Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
 **Returns**: boolean  
@@ -546,6 +656,115 @@ const actor = game.user.character;
 if (actor.hasTalent("Superior Chirurgeon")) {
     // Do some stuff to allow for extra healing
     // See my FirstAid macro for more
+}
+```
+
+* * *
+
+<a name="DarkHeresyActor+getDamageLevel"></a>
+
+### darkHeresyActor.getDamageLevel() ⇒
+Calculates the level of damage a DarkHeresyActor has taken and
+returns a string (effectively an enum) of which level it is.
+
+See [DarkHeresyActor.damageLevel](DarkHeresyActor.damageLevel) for the levels
+
+There are some wrapper functions which might be easier to use that
+just return simple booleans:
+
+[isLightlyDamaged](#DarkHeresyActor+isLightlyDamaged)
+[isHeavilyDamaged](#DarkHeresyActor+isHeavilyDamaged)
+[isCriticallyDamaged](#DarkHeresyActor+isCriticallyDamaged)
+
+These functions only check if a character is in the specified range.
+i.e. if a character is Critically Damaged then isLightlyDamaged will
+return false.
+
+**Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
+**Returns**: boolean  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+**Example**  
+```js
+const actor = game.user.character;
+switch (actor.getDamageLevel()) {
+    case actor.damageLevel.NONE:
+        console.log("I'm fine, thanks for asking");
+        break
+    case actor.damageLevel.LIGHTLY_DAMAGED:
+        console.log("Meh, I've had worse");
+        break
+    case actor.damageLevel.HEAVILY_DAMAGED:
+        console.log("Ok, I'll admit. This hurts");
+        break
+    case actor.damageLevel.CRITICALLY_DAMAGED:
+        console.log(":'(");
+        break
+}
+```
+
+* * *
+
+<a name="DarkHeresyActor+isLightlyDamaged"></a>
+
+### darkHeresyActor.isLightlyDamaged() ⇒
+Checks to see if the DarkHeresyActor is Lightly Damaged
+
+If the character is any other damage level then this function
+returns false.
+
+**Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
+**Returns**: boolean  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+**Example**  
+```js
+const actor = game.user.character;
+if (actor.isLightlyDamaged()) {
+    // Do some stuff to reduce how effective FirstAid is
+    // See the FirstAid macro for more
+}
+```
+
+* * *
+
+<a name="DarkHeresyActor+isHeavilyDamaged"></a>
+
+### darkHeresyActor.isHeavilyDamaged() ⇒
+Checks to see if the DarkHeresyActor is Heavily Damaged
+
+If the character is any other damage level then this function
+returns false.
+
+**Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
+**Returns**: boolean  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+**Example**  
+```js
+const actor = game.user.character;
+if (actor.isHeavilyDamaged()) {
+    // Do some stuff to reduce how effective FirstAid is
+    // See the FirstAid macro for more
+}
+```
+
+* * *
+
+<a name="DarkHeresyActor+isCriticallyDamaged"></a>
+
+### darkHeresyActor.isCriticallyDamaged() ⇒
+Checks to see if the DarkHeresyActor is Critically Damaged
+
+If the character is any other damage level then this function
+returns false.
+
+**Kind**: instance method of [<code>DarkHeresyActor</code>](#DarkHeresyActor)  
+**Returns**: boolean  
+**Requires**: <code>module:moo-man&#x27;s</code>  
+**Example**  
+```js
+const actor = game.user.character;
+if (actor.isCriticallyDamaged()) {
+    // Do some stuff to reduce how effective FirstAid is
+    // See the FirstAid macro for more
 }
 ```
 
