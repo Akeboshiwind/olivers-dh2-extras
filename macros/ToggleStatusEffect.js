@@ -1,6 +1,8 @@
 // TODO: Test works
 // TODO: Add in optional duration
 // TODO: Add in optional reminder every turn
+// TODO: Wrap Dialog so clicking `x` always cancels?
+//       May just need to do more testing on Dialog
 let cancelled = true;
 
 new Dialog({
@@ -41,6 +43,10 @@ new Dialog({
             return ui.notifications.error("Invalid StatusEffect selected");
         }
         
+        if (game.user.targets.size == 0) {
+            return ui.notifications.error("Must select at least 1 target");
+        }
+
         for (const targetToken of game.user.targets) {
             try {
                 await targetToken.toggleEffect(statusEffect);
