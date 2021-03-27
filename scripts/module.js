@@ -432,6 +432,8 @@ Hooks.once('ready', async function() {
                     // We store the id of the about-time event so we can
                     // potentially cancel it later
                     await this.setFlag("world", flagId, eventId);
+                } else {
+                    ui.notifications.warn("Failed to shedule StatusEffect expiry");
                 }
             }
 
