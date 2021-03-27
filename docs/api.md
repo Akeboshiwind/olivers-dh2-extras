@@ -3,12 +3,12 @@
 <dl>
 <dt><a href="#OUtils">OUtils</a></dt>
 <dd></dd>
-<dt><a href="#Actor">Actor</a></dt>
+<dt><a href="#Actor">Actor</a> : <code><a href="#Actor">Actor</a></code></dt>
 <dd><p>Extensions to the base Actor class</p>
 <p>See the <a href="https://foundryvtt.com/api/Actor.html">Actor</a> docs in
 foundry</p>
 </dd>
-<dt><a href="#DarkHeresyActor">DarkHeresyActor</a></dt>
+<dt><a href="#DarkHeresyActor">DarkHeresyActor</a> : <code><a href="#DarkHeresyActor">DarkHeresyActor</a></code></dt>
 <dd><p>Extensions to the DarkHeresyActor class</p>
 <p>See the <a href="https://github.com/moo-man/DarkHeresy2E-FoundryVTT/blob/master/script/common/actor.js">DarkHeresyActor</a> code (no docs yet)</p>
 </dd>
@@ -147,7 +147,7 @@ if (result.success) {
 
 <a name="Actor"></a>
 
-## Actor
+## Actor : [<code>Actor</code>](#Actor)
 Extensions to the base Actor class
 
 See the [Actor](https://foundryvtt.com/api/Actor.html) docs in
@@ -155,7 +155,7 @@ foundry
 
 **Kind**: global variable  
 
-* [Actor](#Actor)
+* [Actor](#Actor) : [<code>Actor</code>](#Actor)
     * [.getToken()](#Actor+getToken) ⇒ <code>Token</code>
     * [.getActiveStatusEffect(effectId)](#Actor+getActiveStatusEffect) ⇒ <code>ActiveEffect</code>
     * [.hasStatusEffect(effectId)](#Actor+hasStatusEffect) ⇒ <code>boolean</code>
@@ -511,7 +511,7 @@ actor.enableStatusEffectFor(effectId, {seconds: 1}, true)
 
 <a name="DarkHeresyActor"></a>
 
-## DarkHeresyActor
+## DarkHeresyActor : [<code>DarkHeresyActor</code>](#DarkHeresyActor)
 Extensions to the DarkHeresyActor class
 
 See the [DarkHeresyActor](https://github.com/moo-man/DarkHeresy2E-FoundryVTT/blob/master/script/common/actor.js) code (no docs yet)

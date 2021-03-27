@@ -142,6 +142,7 @@ Hooks.once('ready', async function() {
      * foundry
      *
      * @name Actor
+     * @type {Actor}
      */
 
     /**
@@ -566,6 +567,7 @@ Hooks.once('ready', async function() {
          * See the {@link https://github.com/moo-man/DarkHeresy2E-FoundryVTT/blob/master/script/common/actor.js|DarkHeresyActor} code (no docs yet)
          *
          * @name DarkHeresyActor
+         * @type {DarkHeresyActor}
          */
         const DarkHeresyActor = CONFIG.Actor.entityClass;
 
