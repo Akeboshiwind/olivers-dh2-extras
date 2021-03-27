@@ -1,4 +1,3 @@
-// TODO: Test Works
 // TODO: Add documentation comments
 let cancelled = true;
 
