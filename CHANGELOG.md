@@ -10,24 +10,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added 
 
 - Added some util functions:
-    - OUtils.getActor
-    - OUtils.listStatusEffectIds
-    - OUtils.getStatusEffect
-    - OUtils.getDegrees
+    - OUtils.getActor()
+    - OUtils.listStatusEffectIds()
+    - OUtils.getStatusEffect()
+    - OUtils.getDegrees()
 - Added some extensions to the Actor class:
-    - Actor.getToken
-    - Actor.getActiveStatusEffect
-    - Actor.hasStatusEffect
-    - Actor.setStatusEffect
-    - Actor.enableStatusEffect
-    - Actor.disableStatusEffect
-    - Actor.enableStatusEffectFor
-    - Actor.getStatusEffectExpiryEvent
-    - Actor.timeUntilStatusEffectExpiry
-    - Actor.cancelStatusEffectExpiry
+    - Actor.getToken()
+    - Actor.getActiveStatusEffect()
+    - Actor.hasStatusEffect()
+    - Actor.setStatusEffect()
+    - Actor.enableStatusEffect()
+    - Actor.disableStatusEffect()
+    - Actor.enableStatusEffectFor()
+    - Actor.getStatusEffectExpiryEvent()
+    - Actor.timeUntilStatusEffectExpiry()
+    - Actor.cancelStatusEffectExpiry()
 - Added some extensions to the DarkHeresyActor class:
-    - DarkHeresyActor.hasTalent
-- Added some macros
+    - DarkHeresyActor.hasTalent()
+    - DarkHeresyActor.damageLevel
+    - DarkHeresyActor.getDamageLevel()
+    - DarkHeresyActor.isLightlyDamaged()
+    - DarkHeresyActor.isHeavilyDamaged()
+    - DarkHeresyActor.isCriticallyDamaged()
+- Added some macros (not deployed with the package)
     - FirstAid
     - ToxinCreation
     - ToggleStatusEffect
