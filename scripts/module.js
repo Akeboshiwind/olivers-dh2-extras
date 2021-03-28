@@ -7,7 +7,7 @@ Hooks.once('ready', async function() {
      *
      * @alias OUtils
      */
-    OUtils = {
+    window.OUtils = {
         /**
          * A convinience function to get an actor, given it's id
          *
