@@ -316,7 +316,7 @@ Hooks.once('ready', async function() {
         return await this.setStatusEffect(effectId, false);
     }
 
-    if (game.modules.get("about-time") !== undefined) {
+    if (game.modules.has("about-time")) {
         // The prefix for the flag we use to track StatusEffect expirys
         const statusEffectForFlag = "olivers-dh2-extras.status";
 
