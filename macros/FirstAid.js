@@ -38,32 +38,9 @@ async function main() {
         };
 
 
-        // >> Skip target and warn if effect is already applied
-
-        // @PDF[Dark Heresy 2|page=109]{First Aid}
-        // A given individual can only be treated
-        // with first aid once every 24 hours
-        if (tActor.hasStatusEffect(healingEffect)) {
-            // TODO: Handle case when about-time isn't installed
-            try {
-                const diff = await tActor.timeUntilStatusEffectExpiry(healingEffect);
-
-                ui.notifications.error(`Target [${tActor.name}] already healed expires in [${diff.days}d ${diff.hours}h ${diff.minutes}m ${diff.seconds}s]`);
-            } catch (e) {
-                console.log("Something went wrong while getting event expiry");
-                console.error(e);
-
-                // Send a default notification without expiry info
-                ui.notifications.warn(e.message);
-                ui.notifications.error(`Target [${tActor.name}] healed in last 24 hours`);
-            }
-            continue;
-        }
-
-
         // >> Calculate roll target
 
-        let healingPenalty = "+0";
+        let healingPenalty = "0";
 
         // @PDF[Dark Heresy 2|page=109]{First Aid}
         // –10 penalty if his patient is Heavily Damaged
@@ -79,7 +56,7 @@ async function main() {
                 healingPenalty = (-10 * tActorInfo.wounds.critical).toString()
             }
         } else if (tActor.isHeavilyDamaged()) {
-            console.log("Target is critically wounded");
+            console.log("Target is heavily damaged");
             // @PDF[Dark Heresy 2|page=131]{Superior Chirurgeon}
             // Ignores the penalties for Heavily Damaged patients 
             if (!casterInfo.hasSuperiorChirurgeon) {
@@ -90,19 +67,19 @@ async function main() {
         // @PDF[Dark Heresy 2|page=109]{First Aid}
         // To perform first aid, a character must make a Challenging (+0)
         // Medicae test (with the penalties above)
-        const rollTarget = new Roll("@medicae + @supChir + @penalty",
+        const rollTarget = await (new Roll("@medicae + @supChir + @penalty",
             {
                 medicae: casterInfo.medicaeTotal,
                 // @PDF[Dark Heresy 2|page=131]{Superior Chirurgeon}
                 // He gains a +20 bonus on all Medicae skill tests
-                supChir: casterInfo.hasSuperiorChirurgeon ? "+20" : "+0",
+                supChir: casterInfo.hasSuperiorChirurgeon ? "20" : "0",
                 penalty: healingPenalty,
-            }).roll();
+            }).roll());
 
 
         // >> Make the Roll
 
-        const roll = new Roll("1d100").roll();
+        const roll = await (new Roll("1d100").roll());
         const degrees = OUtils.getDegrees(rollTarget.total, roll.total);
 
         // >> Prepare the message
@@ -124,10 +101,10 @@ async function main() {
             // plus one additional point of damage per degree of
             // success he scores on the test
             // (removing Critical damage before normal damage).
-            const healing = new Roll("@intBonus + @dos", {
+            const healing = await (new Roll("@intBonus + @dos", {
                 intBonus: casterInfo.intBonus,
                 dos: degrees.degrees,
-            }).roll();
+            }).roll());
 
             const critToRemove = Math.min(tActorInfo.wounds.critical, healing.total);
             const newCritical = tActorInfo.wounds.critical - critToRemove;
@@ -139,13 +116,10 @@ async function main() {
             // TODO:
             // >> Heal the target
 
-
-            // >> Add status Effect to character for 24 hours
-
             // @PDF[Dark Heresy 2|page=109]{First Aid}
             // A given individual can only be treated
             // with first aid once every 24 hours
-            tActor.enableStatusEffectFor(healingEffect, {hours: 24});
+            // TODO: Add to chat message?
 
 
             // >> Prepare message
