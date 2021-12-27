@@ -59,7 +59,7 @@ new Dialog({
         }
     },
     default: 'yes',
-    close: html => {
+    close: async html => {
         if (cancelled) {
             return;
         }
@@ -80,7 +80,7 @@ new Dialog({
         const medicae = character.data.data.skills.medicae.total;
         const hasSuperiorChirurgeon = character.hasTalent("Superior Chirurgeon");
 
-        const target = new Roll("0 + @medicae + @supChir + @sAvail + @sCraft + @sQuant + @wQual + @cirMod",
+        const target = await(new Roll("0 + @medicae + @supChir + @sAvail + @sCraft + @sQuant + @wQual + @cirMod",
             {
                 medicae: medicae,
                 supChir: hasSuperiorChirurgeon ? "+20" : "+0",
@@ -89,9 +89,9 @@ new Dialog({
                 sQuant: sampleQuantity,
                 wQual: workshopQuality,
                 cirMod: circumstantialModifiers,
-            }).roll().total;
+            }).roll()).total;
 
-        const roll = new Roll("1d100").roll();
+        const roll = await(new Roll("1d100").roll());
         const degrees = OUtils.getDegrees(target, roll.total);
 
 
